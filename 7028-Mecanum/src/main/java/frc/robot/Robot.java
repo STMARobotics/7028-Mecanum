@@ -10,6 +10,8 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -24,7 +26,12 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
-  private WPI_TalonSRX motor = new WPI_TalonSRX(0);
+  private WPI_TalonSRX leftFront = new WPI_TalonSRX(0);
+  private WPI_TalonSRX leftBack = new WPI_TalonSRX(1);
+  private WPI_TalonSRX rightFront = new WPI_TalonSRX(2);
+  private WPI_TalonSRX rightBack = new WPI_TalonSRX(3);
+  private MecanumDrive driveTrain = new MecanumDrive(leftFront, leftBack, rightFront, rightBack);
+  private XboxController controller = new XboxController(0);
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -35,6 +42,11 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+
+    leftFront.configFactoryDefault();
+    leftBack.configFactoryDefault();
+    rightFront.configFactoryDefault();
+    rightBack.configFactoryDefault();
   }
 
   /**
