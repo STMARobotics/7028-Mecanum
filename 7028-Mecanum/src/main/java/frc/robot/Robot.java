@@ -24,7 +24,10 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
-  private WPI_TalonSRX motor = new WPI_TalonSRX(0);
+  private WPI_TalonSRX leftFront = new WPI_TalonSRX(0);
+  private WPI_TalonSRX leftBack = new WPI_TalonSRX(1);
+  private WPI_TalonSRX rightFront = new WPI_TalonSRX(2);
+  private WPI_TalonSRX rightBack = new WPI_TalonSRX(3);
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -35,6 +38,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    leftFront.setInverted(true);
   }
 
   /**
@@ -94,12 +98,8 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
 
-<<<<<<< HEAD
-    motor.set(1);
-=======
-    motor.set(.5);
->>>>>>> 0ad27a658a3a1defca3a00613aaa1f7f66ccdae7
-it   }
+    motor.set(1);   
+  }
 
   /**
    * This function is called periodically during operator control.
