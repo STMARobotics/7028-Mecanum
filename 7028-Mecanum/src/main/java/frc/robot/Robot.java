@@ -94,7 +94,11 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
 
+<<<<<<< HEAD
     motor.set(1);
+=======
+    motor.set(.5);
+>>>>>>> 0ad27a658a3a1defca3a00613aaa1f7f66ccdae7
   }
 
   /**
