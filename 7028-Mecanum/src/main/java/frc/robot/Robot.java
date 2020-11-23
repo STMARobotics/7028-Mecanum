@@ -99,7 +99,7 @@ public class Robot extends TimedRobot {
 =======
     motor.set(.5);
 >>>>>>> 0ad27a658a3a1defca3a00613aaa1f7f66ccdae7
-  }
+it   }
 
   /**
    * This function is called periodically during operator control.
