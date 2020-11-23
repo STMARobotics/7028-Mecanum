@@ -9,7 +9,9 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.Controller;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -23,10 +25,13 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+
   private TalonSRX leftFront = new TalonSRX(0);
   private TalonSRX rightFront = new TalonSRX(1);
   private TalonSRX leftRear = new TalonSRX(2);
   private TalonSRX rightRear = new TalonSRX(3);
+  private MechaniumDrive driveTrain = new MechaniumDrive(leftFront, leftRear, rightFront, rightRear);
+  private XboxController controller = new XboxController(0);
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -38,6 +43,8 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
+    leftFront.configFactoryDefault();
+    leftRear.configFactoryDefault();
     leftRear.setInverted(true);
     leftFront.setInverted(true);
   }
@@ -99,10 +106,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     
-    leftFront.set(1);
-    rightFront.set(1);
-    leftRear.set(1);
-    rightRear.set(1);
+    driveTrain.driveCartesian(-controller.getY(Hand.kLeft), controller.getX(Hand.kLeft), controller.getX(Hand.kRight));
   }
 
   /**
