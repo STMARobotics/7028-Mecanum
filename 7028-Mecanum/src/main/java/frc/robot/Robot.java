@@ -98,7 +98,10 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
 
-    motor.set(1);   
+    leftFront.set(1);
+    leftBack.set(1);
+    rightFront.set(1);
+    rightBack.set(1);
   }
 
   /**
