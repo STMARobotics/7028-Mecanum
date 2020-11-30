@@ -10,6 +10,9 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -23,7 +26,12 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-  private WPI_TalonSRX motor = new WPI_TalonSRX(0);
+  private WPI_TalonSRX leftFront = new WPI_TalonSRX(0);
+  private WPI_TalonSRX leftBack = new WPI_TalonSRX(1);
+  private WPI_TalonSRX rightFront = new WPI_TalonSRX(2);
+  private WPI_TalonSRX rightBack = new WPI_TalonSRX(3);
+  private MecanumDrive driveTrain = new MecanumDrive(leftFront, leftBack, rightFront, rightBack);
+  private XboxController controller = new XboxController(0);
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -92,8 +100,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-
-    motor.set(0.2230);
+    
   }
 
   /**
@@ -101,6 +108,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    driveTrain.driveCartesian(controller.getX(Hand.kLeft), -controller.getY(Hand.kLeft), controller.getX(Hand.kRight));
   }
 
   @Override
